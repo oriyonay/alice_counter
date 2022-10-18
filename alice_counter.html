@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>~ alice counter ~</title>
+    <style>
+      body {
+        left: 0;
+        line-height: 200px;
+        margin-top: -200px;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 100%;
+
+        background-color: lightgreen;
+      }
+
+      h1 {
+        font-family: courier;
+      }
+    </style>
+    <script>
+      const SECONDS_IN_DAY = 60 * 60 * 24;
+      const ALICE = new Date('August 23, 2022 16:00:00');
+      var numDays, numHrs, numMins;
+
+      const BGCOLORS = ['lightblue', 'lightgreen', 'aqua', 'aquamarine', 'cornflowerblue',
+                        'darkseagreen', 'deepskyblue', 'greenyellow', 'gold', 'honeydew',
+                        'lavender', 'lightcoral'];
+      const BGCOLOR_LENGTH = BGCOLORS.length;
+
+      function changeBackgroundColor() {
+        pickedcolor = BGCOLORS[Math.floor(Math.random() * BGCOLOR_LENGTH)];
+        document.body.style.backgroundColor = pickedcolor;
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        setInterval(updateCounter, 1000)
+      });
+
+      function updateCounter() {
+        let numSeconds = Math.floor((Date.now() - ALICE) / 1000);
+
+        numDays = Math.floor(numSeconds / SECONDS_IN_DAY);
+
+        numSeconds -= numDays * SECONDS_IN_DAY;
+        numHrs = Math.floor(numSeconds / 3600);
+
+        numSeconds -= numHrs * 3600;
+        numMins = Math.floor(numSeconds / 60);
+
+        numSeconds -= numMins * 60;
+
+        if (numSeconds == 0) changeBackgroundColor();
+
+        let countdownStr = numDays + " days - " + numHrs + " hours - " + numMins +
+            " minutes - " + numSeconds + " seconds";
+        document.querySelector('#count').innerHTML = countdownStr;
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1 id='count'>~ hi there ~</h1>
+    <h1>since meeting alice :)</h1>
+  </body>
+</html>
