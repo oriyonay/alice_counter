@@ -5,14 +5,14 @@
     <style>
       body {
         left: 0;
-        line-height: 200px;
+        line-height: 50px;
         margin-top: -200px;
         position: absolute;
         text-align: center;
         top: 50%;
         width: 100%;
 
-        background-color: lightgreen;
+        background-color: aqua;
       }
 
       h1 {
@@ -21,7 +21,8 @@
     </style>
     <script>
       const SECONDS_IN_DAY = 60 * 60 * 24;
-      const ALICE = new Date('August 23, 2022 16:00:00');
+      const MET_ALICE = new Date('August 23, 2022 16:00:00');
+      const FLYING_BACK = new Date('August 4, 2023 17:45:00');
       var numDays, numHrs, numMins;
 
       const BGCOLORS = ['lightblue', 'lightgreen', 'aqua', 'aquamarine', 'cornflowerblue',
@@ -38,30 +39,57 @@
         setInterval(updateCounter, 1000)
       });
 
+      function seconds_since(date) {
+        return Math.floor((Date.now() - date) / 1000)
+      }
+
+      function seconds_until(date) {
+        return Math.floor(Math.max(date - Date.now(), 0) / 1000)
+      }
+
+      function seconds_to_days(seconds) {
+        return Math.floor(seconds / SECONDS_IN_DAY)
+      }
+
       function updateCounter() {
-        let numSeconds = Math.floor((Date.now() - ALICE) / 1000);
+        // Seconds since meeting Alice <3
+        let seconds = seconds_since(MET_ALICE)
+        days = seconds_to_days(seconds)
+        seconds -= days * SECONDS_IN_DAY;
+        hours = Math.floor(seconds / 3600);
+        seconds -= hours * 3600;
+        minutes = Math.floor(seconds / 60);
+        seconds -= minutes * 60;
 
-        numDays = Math.floor(numSeconds / SECONDS_IN_DAY);
+        if (seconds == 0) changeBackgroundColor();
 
-        numSeconds -= numDays * SECONDS_IN_DAY;
-        numHrs = Math.floor(numSeconds / 3600);
+        let since_meeting_alice = days + " days - " + hours + " hours - " + minutes +
+            " minutes - " + seconds + " seconds";
+        document.querySelector('#since_meeting_alice').innerHTML = since_meeting_alice;
 
-        numSeconds -= numHrs * 3600;
-        numMins = Math.floor(numSeconds / 60);
 
-        numSeconds -= numMins * 60;
+        // Seconds until I fly back
+        seconds = seconds_until(FLYING_BACK)
+        days = seconds_to_days(seconds)
+        seconds -= days * SECONDS_IN_DAY;
+        hours = Math.floor(seconds / 3600);
+        seconds -= hours * 3600;
+        minutes = Math.floor(seconds / 60);
+        seconds -= minutes * 60;
 
-        if (numSeconds == 0) changeBackgroundColor();
-
-        let countdownStr = numDays + " days - " + numHrs + " hours - " + numMins +
-            " minutes - " + numSeconds + " seconds";
-        document.querySelector('#count').innerHTML = countdownStr;
+        let until_flying_back = days + " days - " + hours + " hours - " + minutes +
+            " minutes - " + seconds + " seconds";
+        document.querySelector('#until_flying_back').innerHTML = until_flying_back;
       }
     </script>
   </head>
 
   <body>
-    <h1 id='count'>~ hi there ~</h1>
+    <h1 id='since_meeting_alice'>~ hi there ~</h1>
     <h1>since meeting alice :)</h1>
+    <br><br>
+
+    <h2 id='until_flying_back'></h2>
+    <h2>until i see u again <3</h2>
   </body>
 </html>
