@@ -13,83 +13,84 @@
         width: 100%;
 
         background-color: aqua;
+        font-family: 'Arial', sans-serif; /* Added font */
       }
 
-      h1 {
-        font-family: courier;
+      h1, h2 {
+        font-family: 'Courier New', monospace;
       }
+
+      .counter-container {
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        display: inline-block;
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .animated-heart {
+        text-align: center;
+        font-size: 2em; 
+        color: red;
+      }
+
+      .animated-heart i {
+        animation: pulse 2s infinite;
+      }
+
+      .bottom-content {
+        display: flex;
+        flex-direction: column; /* Stacks the elements vertically */
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        12% {
+          transform: scale(1.2);
+        }
+        24% {
+          transform: scale(1);
+        }
+        30% {
+          transform: scale(1.2);
+        }
+        42% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Transition added for smooth color change */
+      body {
+        transition: background-color 1s;
+      }
+
     </style>
-    <script>
-      const SECONDS_IN_DAY = 60 * 60 * 24;
-      const MET_ALICE = new Date('August 23, 2022 16:00:00');
-      const FLYING_BACK = new Date('August 4, 2023 17:45:00');
-      var numDays, numHrs, numMins;
-
-      const BGCOLORS = ['lightblue', 'lightgreen', 'aqua', 'aquamarine', 'cornflowerblue',
-                        'darkseagreen', 'deepskyblue', 'greenyellow', 'gold', 'honeydew',
-                        'lavender', 'lightcoral'];
-      const BGCOLOR_LENGTH = BGCOLORS.length;
-
-      function changeBackgroundColor() {
-        pickedcolor = BGCOLORS[Math.floor(Math.random() * BGCOLOR_LENGTH)];
-        document.body.style.backgroundColor = pickedcolor;
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        setInterval(updateCounter, 1000)
-      });
-
-      function seconds_since(date) {
-        return Math.floor((Date.now() - date) / 1000)
-      }
-
-      function seconds_until(date) {
-        return Math.floor(Math.max(date - Date.now(), 0) / 1000)
-      }
-
-      function seconds_to_days(seconds) {
-        return Math.floor(seconds / SECONDS_IN_DAY)
-      }
-
-      function updateCounter() {
-        // Seconds since meeting Alice <3
-        let seconds = seconds_since(MET_ALICE)
-        days = seconds_to_days(seconds)
-        seconds -= days * SECONDS_IN_DAY;
-        hours = Math.floor(seconds / 3600);
-        seconds -= hours * 3600;
-        minutes = Math.floor(seconds / 60);
-        seconds -= minutes * 60;
-
-        if (seconds == 0) changeBackgroundColor();
-
-        let since_meeting_alice = days + " days - " + hours + " hours - " + minutes +
-            " minutes - " + seconds + " seconds";
-        document.querySelector('#since_meeting_alice').innerHTML = since_meeting_alice;
-
-
-        // Seconds until I fly back
-        seconds = seconds_until(FLYING_BACK)
-        days = seconds_to_days(seconds)
-        seconds -= days * SECONDS_IN_DAY;
-        hours = Math.floor(seconds / 3600);
-        seconds -= hours * 3600;
-        minutes = Math.floor(seconds / 60);
-        seconds -= minutes * 60;
-
-        let until_flying_back = days + " days - " + hours + " hours - " + minutes +
-            " minutes - " + seconds + " seconds";
-        document.querySelector('#until_flying_back').innerHTML = until_flying_back;
-      }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="logic.js"></script>
   </head>
 
   <body>
     <h1 id='since_meeting_alice'>~ hi there ~</h1>
     <h1>since meeting alice :)</h1>
     <br><br>
-
-    <h2 id='until_flying_back'></h2>
-    <h2>until i see u again <3</h2>
+    <div class="counter-container">
+      <div class="bottom-content">
+        <h2 id='until_flying_back'></h2>
+        <h2 id='until_flying_back_in_seconds'></h2>
+        <h2>until i see u again</h2>
+        <div class="animated-heart">
+          <i class="fas fa-heart"></i>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
