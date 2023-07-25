@@ -1,6 +1,7 @@
 const SECONDS_IN_DAY = 60 * 60 * 24
 const MET_ALICE = new Date('August 23, 2022 16:00:00')
 const FLYING_BACK = new Date('August 4, 2023 17:45:00')
+const COUNTDOWN_START = new Date('July 17, 2023 10:00:00')
 var numDays, numHrs, numMins
 
 const BGCOLORS = [
@@ -35,8 +36,8 @@ function seconds_to_string(seconds) {
     minutes = Math.floor(seconds / 60)
     seconds -= minutes * 60
 
-    return days + " days - " + hours + " hours - " + minutes +
-        " minutes - " + seconds + " seconds"
+    return days + ' days - ' + hours + ' hours - ' + minutes +
+        ' minutes - ' + seconds + ' seconds'
 }
 
 function updateCounter() {
@@ -48,8 +49,16 @@ function updateCounter() {
 
     // Seconds until I fly back
     seconds = seconds_until(FLYING_BACK)
-    let seconds_str = "(only " + seconds.toLocaleString() + " seconds)"
+    let seconds_str = '(only ' + seconds.toLocaleString() + ' seconds)'
     let until_flying_back = seconds_to_string(seconds)
     document.querySelector('#until_flying_back').innerHTML = until_flying_back
     document.querySelector('#until_flying_back_in_seconds').innerHTML = seconds_str
+
+    // Update progress bar
+    const total = seconds_since(COUNTDOWN_START) + seconds_until(FLYING_BACK)
+    const elapsed = seconds_since(COUNTDOWN_START)
+    let progress_percentage = (elapsed / total) * 100
+    console.log(progress_percentage)
+    document.getElementById('progress-bar').style.width = progress_percentage + '%'
+    document.getElementById('progress-bar-text').textContent = progress_percentage.toFixed(2) + '%'
 }
