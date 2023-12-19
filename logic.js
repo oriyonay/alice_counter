@@ -1,7 +1,7 @@
 const SECONDS_IN_DAY = 60 * 60 * 24
 const MET_ALICE = new Date('August 23, 2022 16:00:00')
-const FLYING_BACK = new Date('August 4, 2023 17:45:00')
-const COUNTDOWN_START = new Date('July 17, 2023 10:00:00')
+const FLYING_BACK = new Date('December 31, 2023 15:00:00')
+const COUNTDOWN_START = new Date('December 18, 2023 17:00:00')
 var numDays, numHrs, numMins
 
 const BGCOLORS = [
@@ -17,7 +17,7 @@ function changeBackgroundColor() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setInterval(updateCounter, 1000)
+    setInterval(update, 1000)
 })
 
 function seconds_since(date) {
@@ -40,7 +40,34 @@ function seconds_to_string(seconds) {
         ' minutes - ' + seconds + ' seconds'
 }
 
-function updateCounter() {
+function updateNote(seconds) {
+    const milestones = {
+        20001: 'Blast off! Like in "2001: A Space Odyssey"',
+        31416: '31416, the first five digits of π',
+        42042: 'The meaning of everything: 42,042 :) jk it\'s you',
+        65537: 'A really nice prime number: 65537 is 2^16 + 1',
+        81920: 'Power play: 81920 is 2^13 times 10 and LESS THAN 24 HOURS',
+        123456: '123456 is such a silly little number',
+        314159: 'The full Pi: 314159, the first six digits of π',
+        360000: 'ONLY ONE HUNDRED HOURS!',
+        555555: 'Lucky streak: 555,555!',
+        666666: 'We just passed 666,666 - the number of the beast!',
+        888888: 'Fortune smiles: we just passed 888,888!',
+        1000000: 'NOW it\'s under a million seconds!'
+    }
+
+    var message = 'I thought it would be under a million seconds! Give it a few hours, my love :)'
+    for (const [milestone, milestoneMessage] of Object.entries(milestones)) {
+        if (seconds <= milestone) {
+            message = milestoneMessage
+            break
+        }
+    }
+    document.querySelector('#note').innerHTML = message;
+}
+
+
+function update() {
     // Seconds since meeting Alice <3
     if (seconds_since(MET_ALICE) % 15 == 0) changeBackgroundColor()
     let since_meeting_alice = seconds_to_string(seconds_since(MET_ALICE))
@@ -58,7 +85,10 @@ function updateCounter() {
     const total = seconds_since(COUNTDOWN_START) + seconds_until(FLYING_BACK)
     const elapsed = seconds_since(COUNTDOWN_START)
     let progress_percentage = (elapsed / total) * 100
-    console.log(progress_percentage)
+    // console.log(progress_percentage)
     document.getElementById('progress-bar').style.width = progress_percentage + '%'
     document.getElementById('progress-bar-text').textContent = progress_percentage.toFixed(2) + '%'
+
+    // Update note
+    updateNote(seconds)
 }
