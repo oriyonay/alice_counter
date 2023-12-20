@@ -52,6 +52,7 @@ function updateNote(seconds) {
         360000: 'ONLY ONE HUNDRED HOURS!',
         555555: 'Lucky streak: 555,555!',
         666666: 'We just passed 666,666 - the number of the beast!',
+        696969: '696969 lmao',
         888888: 'Fortune smiles: we just passed 888,888!',
         1000000: 'NOW it\'s under a million seconds!'
     }
