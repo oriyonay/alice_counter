@@ -50,14 +50,15 @@ function updateNote(seconds) {
         123456: '123456 is such a silly little number',
         314159: 'The full Pi: 314159, the first six digits of π',
         360000: 'ONLY ONE HUNDRED HOURS!',
-        555555: 'Lucky streak: 555,555!',
-        666666: 'We just passed 666,666 - the number of the beast!',
-        696969: '696969 lmao',
-        888888: 'Fortune smiles: we just passed 888,888!',
-        1000000: 'NOW it\'s under a million seconds!'
+        // 555555: 'Lucky streak: 555,555!',
+        // 666666: 'We just passed 666,666 - the number of the beast!',
+        // 696969: '696969 lmao',
+        // 888888: 'Fortune smiles: we just passed 888,888!',
+        // 1000000: 'NOW it\'s under a million seconds!'
     }
 
-    var message = 'I thought it would be under a million seconds! Give it a few hours, my love :)'
+    // var message = 'I thought it would be under a million seconds! Give it a few hours, my love :)'
+    var message = 'Fun number facts will show up here soon :)'
     for (const [milestone, milestoneMessage] of Object.entries(milestones)) {
         if (seconds <= milestone) {
             message = milestoneMessage
