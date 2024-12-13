@@ -84,3 +84,13 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+/* frog modal styling */
+#modal {
+  z-index: 1000;
+}
+
+/* Frog styling */
+#frog {
+  z-index: 999;
+}
