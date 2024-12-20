@@ -128,7 +128,7 @@ function createFrog() {
 
     // Add click event to display modal
     frog.addEventListener('click', () => {
-        displayModal("\"I must wander deserts toward a promised land, arrange my pieces in perfect harmony, and travel back in time to help a young Ori. Will you help me? *frog sounds*\"");
+        displayModal("shabbat shalom, my love! i am counting the seconds to see you *frog sounds*");
     });
 }
 
