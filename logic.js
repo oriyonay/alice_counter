@@ -128,7 +128,7 @@ function createFrog() {
 
     // Add click event to display modal
     frog.addEventListener('click', () => {
-        displayModal("shabbat shalom, my love! i am counting the seconds to see you *frog sounds*");
+        displayModal("this frog misses you very much <3 *frog sounds*");
     });
 }
 
