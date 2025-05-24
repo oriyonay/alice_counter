@@ -2,8 +2,8 @@
 
 const SECONDS_IN_DAY = 60 * 60 * 24
 const MET_ALICE = new Date('August 23, 2022 16:00:00')
-const FLYING_BACK = new Date('January 9, 2025 21:00:00')
-const COUNTDOWN_START = new Date('January 3, 2025 10:00:00')
+const FLYING_BACK = new Date('May 27, 2025 19:00:00')
+const COUNTDOWN_START = new Date('May 21, 2025 10:00:00')
 var numDays, numHrs, numMins
 
 const BGCOLORS = [
